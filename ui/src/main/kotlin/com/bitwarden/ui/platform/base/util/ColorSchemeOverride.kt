@@ -8,8 +8,10 @@ import com.bitwarden.ui.platform.theme.LocalBitwardenColorScheme
 import com.bitwarden.ui.platform.theme.LocalBitwardenDynamicDarkColorScheme
 import com.bitwarden.ui.platform.theme.LocalBitwardenDynamicLightColorScheme
 import com.bitwarden.ui.platform.theme.color.BitwardenColorScheme
+import com.bitwarden.ui.platform.theme.color.customThemePalettes
 import com.bitwarden.ui.platform.theme.color.darkBitwardenColorScheme
 import com.bitwarden.ui.platform.theme.color.lightBitwardenColorScheme
+import com.bitwarden.ui.platform.theme.color.toBitwardenColorScheme
 
 /**
  * Overrides the [BitwardenColorScheme] for the [content] based on the provided [AppTheme].
@@ -35,6 +37,13 @@ fun ColorSchemeOverride(
             } else {
                 lightBitwardenColorScheme
             }
+        }
+
+        else -> {
+            customThemePalettes
+                .firstOrNull { it.id == appTheme.value }
+                ?.toBitwardenColorScheme()
+                ?: darkBitwardenColorScheme
         }
     }
     CompositionLocalProvider(
