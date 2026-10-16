@@ -14,12 +14,13 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: 17   # check the repo README; bump if it asks for newer
+          java-version: 21
 
       - uses: gradle/actions/setup-gradle@v4
 
-      # Run `./gradlew :app:tasks --all | grep -i debug` locally or in a
-      # throwaway step if this task name is rejected.
+      - name: Add GitHub Packages token
+        run: echo "gitHubToken=${{ secrets.GH_PACKAGES_TOKEN }}" > user.properties
+
       - name: Build
         run: ./gradlew :app:assembleStandardDebug --no-daemon
 
