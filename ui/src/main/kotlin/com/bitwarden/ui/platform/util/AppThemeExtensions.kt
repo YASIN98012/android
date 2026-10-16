@@ -2,6 +2,7 @@ package com.bitwarden.ui.platform.util
 
 import com.bitwarden.ui.platform.feature.settings.appearance.model.AppTheme
 import com.bitwarden.ui.platform.resource.BitwardenString
+import com.bitwarden.ui.platform.theme.color.customThemePalettes
 import com.bitwarden.ui.util.Text
 import com.bitwarden.ui.util.asText
 
@@ -13,6 +14,7 @@ val AppTheme.displayLabel: Text
         AppTheme.DEFAULT -> BitwardenString.default_system.asText()
         AppTheme.DARK -> BitwardenString.dark.asText()
         AppTheme.LIGHT -> BitwardenString.light.asText()
+        else -> (customThemePalettes.firstOrNull { it.id == value }?.label ?: name).asText()
     }
 
 /**
@@ -25,4 +27,5 @@ fun AppTheme.isDarkMode(
         AppTheme.DEFAULT -> isSystemDarkMode
         AppTheme.DARK -> true
         AppTheme.LIGHT -> false
+        else -> customThemePalettes.firstOrNull { it.id == value }?.isDark ?: true
     }
