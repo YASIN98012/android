@@ -41,6 +41,10 @@ import com.bitwarden.ui.platform.resource.BitwardenDrawable
 import com.bitwarden.ui.platform.resource.BitwardenString
 import com.bitwarden.ui.platform.util.displayLabel
 import kotlinx.collections.immutable.toImmutableList
+import androidx.compose.material3.Text
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.sp
+import com.bitwarden.ui.platform.theme.BitwardenTheme
 
 /**
  * Displays the appearance screen.
@@ -148,6 +152,26 @@ fun AppearanceScreen(
                 cardStyle = CardStyle.Full,
                 modifier = Modifier
                     .testTag("ShowWebsiteIconsSwitch")
+                    .fillMaxWidth()
+                    .standardHorizontalMargin(),
+            )
+                        Spacer(modifier = Modifier.height(height = 24.dp))
+            Text(
+                text = "Themes by w9tc",
+                color = BitwardenTheme.colorScheme.text.secondary,
+                fontSize = 14.sp,
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .standardHorizontalMargin(),
+            )
+            Spacer(modifier = Modifier.height(height = 4.dp))
+            Text(
+                text = "Yassin Haitham",
+                color = BitwardenTheme.colorScheme.text.secondary,
+                fontSize = 11.sp,
+                textAlign = TextAlign.Center,
+                modifier = Modifier
                     .fillMaxWidth()
                     .standardHorizontalMargin(),
             )
