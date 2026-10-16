@@ -2,6 +2,7 @@ package com.bitwarden.ui.platform.theme.color
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.luminance
+import androidx.compose.ui.graphics.lerp
 
 data class ThemePalette(
     val id: String,
