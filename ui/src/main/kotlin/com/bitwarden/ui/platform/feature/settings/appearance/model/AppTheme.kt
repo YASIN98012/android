@@ -1,14 +1,31 @@
-package com.bitwarden.ui.platform.feature.settings.appearance.model
+package com.bitwarden.ui.platform.util
 
-import androidx.appcompat.app.AppCompatDelegate
+import com.bitwarden.ui.platform.feature.settings.appearance.model.AppTheme
+import com.bitwarden.ui.platform.resource.BitwardenString
+import com.bitwarden.ui.platform.theme.color.customThemePalettes
+import com.bitwarden.ui.util.Text
+import com.bitwarden.ui.util.asText
 
 /**
- * Represents the theme options the user can set.
- *
- * The [value] is used for consistent storage purposes.
+ * Returns a human-readable display label for the given [AppTheme].
  */
-enum class AppTheme(val value: String?, val osValue: Int) {
-    DEFAULT(value = null, osValue = AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM),
-    DARK(value = "dark", osValue = AppCompatDelegate.MODE_NIGHT_YES),
-    LIGHT(value = "light", osValue = AppCompatDelegate.MODE_NIGHT_NO),
-}
+val AppTheme.displayLabel: Text
+    get() = when (this) {
+        AppTheme.DEFAULT -> BitwardenString.default_system.asText()
+        AppTheme.DARK -> BitwardenString.dark.asText()
+        AppTheme.LIGHT -> BitwardenString.light.asText()
+        else -> (customThemePalettes.firstOrNull { it.id == value }?.label ?: name).asText()
+    }
+
+/**
+ * Returns `true` if the app is currently using dark mode.
+ */
+fun AppTheme.isDarkMode(
+    isSystemDarkMode: Boolean,
+): Boolean =
+    when (this) {
+        AppTheme.DEFAULT -> isSystemDarkMode
+        AppTheme.DARK -> true
+        AppTheme.LIGHT -> false
+        else -> customThemePalettes.firstOrNull { it.id == value }?.isDark ?: true
+    }
