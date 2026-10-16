@@ -30,6 +30,8 @@ import com.bitwarden.ui.platform.theme.type.BitwardenTypography
 import com.bitwarden.ui.platform.theme.type.bitwardenTypography
 import com.bitwarden.ui.platform.theme.type.toMaterialTypography
 import com.bitwarden.ui.platform.util.isDarkMode
+import com.bitwarden.ui.platform.theme.color.customThemePalettes
+import com.bitwarden.ui.platform.theme.color.toBitwardenColorScheme
 
 /**
  * Static wrapper to make accessing the theme components easier.
@@ -93,11 +95,13 @@ fun BitwardenTheme(
         materialColorScheme = darkMaterialColorScheme,
         isDarkTheme = true,
     )
-    val bitwardenColorScheme = when {
-        isDynamicEnabled -> if (isDarkTheme) darkDynamicColorScheme else lightDynamicColorScheme
-        isDarkTheme -> darkBitwardenColorScheme
-        else -> lightBitwardenColorScheme
-    }
+    val customPalette = customThemePalettes.firstOrNull { it.id == theme.value }
+val bitwardenColorScheme = when {
+    customPalette != null -> customPalette.toBitwardenColorScheme()
+    isDynamicEnabled -> if (isDarkTheme) darkDynamicColorScheme else lightDynamicColorScheme
+    isDarkTheme -> darkBitwardenColorScheme
+    else -> lightBitwardenColorScheme
+}
     // Provide the selected color scheme as well as the dynamic ones for override support.
     CompositionLocalProvider(
         LocalBitwardenColorScheme provides bitwardenColorScheme,
