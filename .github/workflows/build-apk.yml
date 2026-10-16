@@ -1,0 +1,30 @@
+name: Build debug APK
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17   # check the repo README; bump if it asks for newer
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      # Run `./gradlew :app:tasks --all | grep -i debug` locally or in a
+      # throwaway step if this task name is rejected.
+      - name: Build
+        run: ./gradlew :app:assembleStandardDebug --no-daemon
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: bitwarden-debug-apk
+          path: app/build/outputs/apk/**/*.apk
+          
