@@ -2,6 +2,7 @@
 
 package com.bitwarden.ui.platform.base.util
 
+import androidx.compose.foundation.border
 import android.os.Build
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.BorderStroke
@@ -546,7 +547,7 @@ fun Modifier.cardStyle(
 @Composable
 fun Modifier.cardBackground(
     cardStyle: CardStyle?,
-    color: Color = BitwardenTheme.colorScheme.background.secondary,
+    color: Color = cardContainerColor(),
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ): Modifier {
     cardStyle ?: return this
@@ -563,9 +564,19 @@ fun Modifier.cardBackground(
             CardStyle.Full -> BitwardenTheme.shapes.content
         }
     }
+        val glassBorder = if (BitwardenTheme.colorScheme.isGlass) {
+        Modifier.border(
+            width = 1.dp,
+            color = Color.White.copy(alpha = 0.18f),
+            shape = shape,
+        )
+    } else {
+        Modifier
+    }
     return this
         .clip(shape = shape)
         .background(color = color, shape = shape)
+        .then(glassBorder)
         .interactiveBorder(interactionSource = interactionSource, shape = shape)
         .bottomDivider(
             paddingStart = cardStyle.dividerPadding,
