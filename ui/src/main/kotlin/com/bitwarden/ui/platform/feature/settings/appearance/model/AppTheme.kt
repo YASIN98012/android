@@ -48,4 +48,10 @@ enum class AppTheme(val value: String?, val osValue: Int) {
     LATTE(value = "latte", osValue = AppCompatDelegate.MODE_NIGHT_NO),
     PAPER(value = "paper", osValue = AppCompatDelegate.MODE_NIGHT_NO),
     ROSE_PINE_DAWN(value = "rose_pine_dawn", osValue = AppCompatDelegate.MODE_NIGHT_NO),
+    GLASS_AURORA(value = "glass_aurora", osValue = AppCompatDelegate.MODE_NIGHT_YES),
+    GLASS_OCEAN(value = "glass_ocean", osValue = AppCompatDelegate.MODE_NIGHT_YES),
+    GLASS_SUNSET(value = "glass_sunset", osValue = AppCompatDelegate.MODE_NIGHT_YES),
+    GLASS_VIOLET(value = "glass_violet", osValue = AppCompatDelegate.MODE_NIGHT_YES),
+    GLASS_MINT(value = "glass_mint", osValue = AppCompatDelegate.MODE_NIGHT_YES),
+    GLASS_ROSE(value = "glass_rose", osValue = AppCompatDelegate.MODE_NIGHT_YES),
 }
