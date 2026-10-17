@@ -28,6 +28,7 @@ import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import com.bitwarden.ui.platform.base.util.interactiveBorder
+import com.bitwarden.ui.platform.base.util.liquidGlass
 import com.bitwarden.ui.platform.theme.BitwardenTheme
 import com.bitwarden.ui.platform.theme.animation.focusAnimationSpec
 import com.bitwarden.ui.platform.theme.ripple.NoFocusRippleConfig
@@ -62,8 +63,9 @@ internal fun BitwardenBaseButton(
             interactionSource = interactionSource,
             modifier = modifier.semantics { role = Role.Button },
         ) {
-            Row(
+                        Row(
                 modifier = Modifier
+                    .liquidGlass(shape = shape)
                     .defaultMinSize(
                         minWidth = ButtonDefaults.MinWidth,
                         minHeight = ButtonDefaults.MinHeight,
