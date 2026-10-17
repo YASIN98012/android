@@ -101,6 +101,14 @@ fun VaultContent(
         item(key = "top_spacer") {
             Spacer(modifier = Modifier.height(height = 12.dp))
         }
+                item(key = "greeting") {
+            TypewriterGreeting(
+                modifier = Modifier
+                    .standardHorizontalMargin()
+                    .padding(horizontal = 16.dp),
+            )
+            Spacer(modifier = Modifier.height(height = 16.dp))
+                }
 
         actionCardState?.let {
             item(key = "action_card") {
