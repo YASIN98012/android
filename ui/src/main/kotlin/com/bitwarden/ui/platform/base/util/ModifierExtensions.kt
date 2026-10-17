@@ -451,7 +451,7 @@ fun Modifier.cardStyle(
     clickEnabled: Boolean = true,
     paddingHorizontal: Dp = 0.dp,
     paddingVertical: Dp = 12.dp,
-    containerColor: Color = BitwardenTheme.colorScheme.background.secondary,
+    containerColor: Color = cardContainerColor(),
     indicationColor: Color = BitwardenTheme.colorScheme.background.pressed,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ): Modifier =
@@ -484,7 +484,7 @@ fun Modifier.cardStyle(
     paddingTop: Dp = 12.dp,
     paddingEnd: Dp = 0.dp,
     paddingBottom: Dp = 12.dp,
-    containerColor: Color = BitwardenTheme.colorScheme.background.secondary,
+    containerColor: Color = cardContainerColor(),
     indicationColor: Color = BitwardenTheme.colorScheme.background.pressed,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ): Modifier =
@@ -516,7 +516,7 @@ fun Modifier.cardStyle(
     role: Role? = null,
     clickEnabled: Boolean = true,
     padding: PaddingValues = PaddingValues(horizontal = 0.dp, vertical = 12.dp),
-    containerColor: Color = BitwardenTheme.colorScheme.background.secondary,
+    containerColor: Color = cardContainerColor(),
     indicationColor: Color = BitwardenTheme.colorScheme.background.pressed,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ): Modifier =
@@ -585,4 +585,10 @@ fun Modifier.cardPadding(
 ): Modifier {
     cardStyle ?: return this
     return this.padding(paddingValues = paddingValues)
+}
+
+@Composable
+internal fun cardContainerColor(): Color {
+    val color = BitwardenTheme.colorScheme.background.secondary
+    return if (BitwardenTheme.colorScheme.isGlass) color.copy(alpha = 0.55f) else color
 }
