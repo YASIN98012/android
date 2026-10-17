@@ -21,6 +21,7 @@ data class BitwardenColorScheme(
     val status: StatusColors,
     val statusBadge: StatusBadgeColors,
     val illustration: IllustrationColors,
+    val isGlass: Boolean = false, 
 ) {
     /**
      * Defines all the text colors for the app.
