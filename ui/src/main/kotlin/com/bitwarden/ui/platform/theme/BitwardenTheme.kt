@@ -32,6 +32,12 @@ import com.bitwarden.ui.platform.theme.type.toMaterialTypography
 import com.bitwarden.ui.platform.util.isDarkMode
 import com.bitwarden.ui.platform.theme.color.customThemePalettes
 import com.bitwarden.ui.platform.theme.color.toBitwardenColorScheme
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import kotlinx.coroutines.delay
 
 /**
  * Static wrapper to make accessing the theme components easier.
@@ -95,9 +101,19 @@ fun BitwardenTheme(
         materialColorScheme = darkMaterialColorScheme,
         isDarkTheme = true,
     )
-    val customPalette = customThemePalettes.firstOrNull { it.id == theme.value }
-val bitwardenColorScheme = when {
-    customPalette != null -> customPalette.toBitwardenColorScheme()
+        val customPalette = customThemePalettes.firstOrNull { it.id == theme.value }
+    var phase by remember { mutableIntStateOf(0) }
+    if (customPalette != null && customPalette.primary2 != null) {
+        LaunchedEffect(customPalette.id) {
+            while (true) {
+                delay(1_000L)
+                phase = (phase + 1) % 60
+            }
+        }
+    }
+    val progress = if (phase <= 30) phase / 30f else (60 - phase) / 30f
+    val bitwardenColorScheme = when {
+        customPalette != null -> customPalette.toBitwardenColorScheme(progress)
     isDynamicEnabled -> if (isDarkTheme) darkDynamicColorScheme else lightDynamicColorScheme
     isDarkTheme -> darkBitwardenColorScheme
     else -> lightBitwardenColorScheme
