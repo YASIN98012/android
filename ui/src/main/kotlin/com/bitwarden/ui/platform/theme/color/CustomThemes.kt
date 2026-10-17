@@ -17,6 +17,8 @@ data class ThemePalette(
     val accent2: Long? = null,
         val bg2: Long? = null,
     val surface2: Long? = null,
+    val isGlass: Boolean = false,
+    
 )
 
 fun ThemePalette.toBitwardenColorScheme(progress: Float = 0f): BitwardenColorScheme {
