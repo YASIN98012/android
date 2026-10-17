@@ -141,7 +141,11 @@ fun BitwardenScaffold(
             }
         },
         floatingActionButtonPosition = floatingActionButtonPosition,
-        containerColor = containerColor,
+                containerColor = if (BitwardenTheme.colorScheme.isGlass) {
+            Color.Transparent
+        } else {
+            containerColor
+        },
         contentColor = contentColor,
         contentWindowInsets = WindowInsets(0.dp),
         content = { paddingValues ->
