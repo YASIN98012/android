@@ -7,6 +7,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.graphics.RectangleShape
+import com.bitwarden.ui.platform.base.util.cardContainerColor
+import com.bitwarden.ui.platform.base.util.liquidGlass
 import com.bitwarden.ui.platform.base.util.topDivider
 import com.bitwarden.ui.platform.components.navigation.model.NavigationItem
 import com.bitwarden.ui.platform.theme.BitwardenTheme
@@ -24,10 +27,12 @@ fun BitwardenBottomAppBar(
     windowInsets: WindowInsets = BottomAppBarDefaults.windowInsets,
 ) {
     BottomAppBar(
-        containerColor = BitwardenTheme.colorScheme.background.secondary,
+                containerColor = cardContainerColor(),
         contentColor = Color.Unspecified,
         windowInsets = windowInsets,
-        modifier = modifier.topDivider(),
+                modifier = modifier
+            .topDivider()
+            .liquidGlass(shape = RectangleShape),
     ) {
         navigationItems.forEach { navigationItem ->
             BitwardenNavigationBarItem(
