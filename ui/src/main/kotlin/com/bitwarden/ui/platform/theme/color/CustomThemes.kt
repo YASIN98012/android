@@ -15,12 +15,14 @@ data class ThemePalette(
         val accent: Long,
     val primary2: Long? = null,
     val accent2: Long? = null,
+        val bg2: Long? = null,
+    val surface2: Long? = null,
 )
 
 fun ThemePalette.toBitwardenColorScheme(progress: Float = 0f): BitwardenColorScheme {
     val base = if (isDark) darkBitwardenColorScheme else lightBitwardenColorScheme
-    val bgC = Color(bg)
-    val surfaceC = Color(surface)
+        val bgC = bg2?.let { lerp(Color(bg), Color(it), progress) } ?: Color(bg)
+    val surfaceC = surface2?.let { lerp(Color(surface), Color(it), progress) } ?: Color(surface)
     val textC = Color(text)
         val primaryC = primary2?.let { lerp(Color(primary), Color(it), progress) } ?: Color(primary)
     val accentC = accent2?.let { lerp(Color(accent), Color(it), progress) } ?: Color(accent)
@@ -101,7 +103,9 @@ private fun dark(
     accent: Long,
     primary2: Long? = null,
     accent2: Long? = null,
-) = ThemePalette(id, label, true, bg, surface, text, primary, accent, primary2, accent2)
+    bg2: Long? = null,
+    surface2: Long? = null,
+) = ThemePalette(id, label, true, bg, surface, text, primary, accent, primary2, accent2, bg2, surface2)
 
 private fun light(
     id: String,
@@ -144,11 +148,11 @@ val customThemePalettes: List<ThemePalette> = listOf(
     dark("sunset", "Sunset", 0xFF1A0F1F, 0xFF2A1830, 0xFFFFE8D6, 0xFFFF6B6B, 0xFFFFB86B),
     dark("deep_space", "Deep Space", 0xFF05060F, 0xFF0E1124, 0xFFE3E8FF, 0xFF6C8CFF, 0xFFA78BFA),
     dark("coffee", "Coffee", 0xFF17110D, 0xFF261C16, 0xFFEFE0D0, 0xFFD4A373, 0xFFA98467),
-    dark("aurora_shift", "Aurora (animated)", 0xFF0B1220, 0xFF121C2E, 0xFFE6F1FF, 0xFF3DDC97, 0xFF7B61FF, 0xFF7B61FF, 0xFF3DDC97),
-    dark("synthwave_shift", "Synthwave (animated)", 0xFF262335, 0xFF34294F, 0xFFFFFFFF, 0xFFFF7EDB, 0xFF36F9F6, 0xFF36F9F6, 0xFFFF7EDB),
-    dark("cyberpunk_shift", "Cyberpunk (animated)", 0xFF0D0221, 0xFF1A0B3B, 0xFFF1E9FF, 0xFFFF2A6D, 0xFF05D9E8, 0xFF05D9E8, 0xFFFF2A6D),
-    dark("sunset_shift", "Sunset (animated)", 0xFF1A0F1F, 0xFF2A1830, 0xFFFFE8D6, 0xFFFF6B6B, 0xFFFFB86B, 0xFFFFB86B, 0xFFFF6B6B),
-    dark("ocean_shift", "Midnight Ocean (animated)", 0xFF06141F, 0xFF0D2233, 0xFFDCEBF5, 0xFF2EC4B6, 0xFF4EA8DE, 0xFF4EA8DE, 0xFF2EC4B6),
+    dark("aurora_shift", "Aurora (animated)", 0xFF0B1220, 0xFF121C2E, 0xFFE6F1FF, 0xFF3DDC97, 0xFF7B61FF, 0xFF7B61FF, 0xFF3DDC97, 0xFF150B2E, 0xFF1E1540),
+    dark("synthwave_shift", "Synthwave (animated)", 0xFF262335, 0xFF34294F, 0xFFFFFFFF, 0xFFFF7EDB, 0xFF36F9F6, 0xFF36F9F6, 0xFFFF7EDB, 0xFF123040, 0xFF1D4457),
+    dark("cyberpunk_shift", "Cyberpunk (animated)", 0xFF0D0221, 0xFF1A0B3B, 0xFFF1E9FF, 0xFFFF2A6D, 0xFF05D9E8, 0xFF05D9E8, 0xFFFF2A6D, 0xFF021A21, 0xFF0B2F3B),
+    dark("sunset_shift", "Sunset (animated)", 0xFF1A0F1F, 0xFF2A1830, 0xFFFFE8D6, 0xFFFF6B6B, 0xFFFFB86B, 0xFFFFB86B, 0xFFFF6B6B, 0xFF2B1612, 0xFF3F211A),
+    dark("ocean_shift", "Midnight Ocean (animated)", 0xFF06141F, 0xFF0D2233, 0xFFDCEBF5, 0xFF2EC4B6, 0xFF4EA8DE, 0xFF4EA8DE, 0xFF2EC4B6, 0xFF0A1F1A, 0xFF12332C),
     light("solarized_light", "Solarized Light", 0xFFFDF6E3, 0xFFEEE8D5, 0xFF586E75, 0xFF268BD2, 0xFFB58900),
     light("latte", "Catppuccin Latte", 0xFFEFF1F5, 0xFFDCE0E8, 0xFF4C4F69, 0xFF8839EF, 0xFFEA76CB),
     light("paper", "Paper", 0xFFFAF8F3, 0xFFEDE9DF, 0xFF2B2B2B, 0xFF1F6FEB, 0xFFD9480F),
