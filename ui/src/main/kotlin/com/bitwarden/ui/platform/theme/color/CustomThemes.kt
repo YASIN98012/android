@@ -31,7 +31,8 @@ fun ThemePalette.toBitwardenColorScheme(progress: Float = 0f): BitwardenColorSch
     val onPrimary = if (primaryC.luminance() > 0.5f) Color.Black else Color.White
     val muted = textC.copy(alpha = 0.65f)
     val line = textC.copy(alpha = 0.18f)
-    return base.copy(
+        return base.copy(
+        isGlass = isGlass,
         text = base.text.copy(
             primary = textC,
             secondary = muted,
@@ -109,6 +110,16 @@ private fun dark(
     surface2: Long? = null,
 ) = ThemePalette(id, label, true, bg, surface, text, primary, accent, primary2, accent2, bg2, surface2)
 
+private fun glass(
+    id: String,
+    label: String,
+    bg: Long,
+    surface: Long,
+    text: Long,
+    primary: Long,
+    accent: Long,
+) = ThemePalette(id, label, true, bg, surface, text, primary, accent, isGlass = true)
+
 private fun light(
     id: String,
     label: String,
@@ -155,6 +166,12 @@ val customThemePalettes: List<ThemePalette> = listOf(
     dark("cyberpunk_shift", "Cyberpunk (animated)", 0xFF0D0221, 0xFF1A0B3B, 0xFFF1E9FF, 0xFFFF2A6D, 0xFF05D9E8, 0xFF05D9E8, 0xFFFF2A6D, 0xFF021A21, 0xFF0B2F3B),
     dark("sunset_shift", "Sunset (animated)", 0xFF1A0F1F, 0xFF2A1830, 0xFFFFE8D6, 0xFFFF6B6B, 0xFFFFB86B, 0xFFFFB86B, 0xFFFF6B6B, 0xFF2B1612, 0xFF3F211A),
     dark("ocean_shift", "Midnight Ocean (animated)", 0xFF06141F, 0xFF0D2233, 0xFFDCEBF5, 0xFF2EC4B6, 0xFF4EA8DE, 0xFF4EA8DE, 0xFF2EC4B6, 0xFF0A1F1A, 0xFF12332C),
+    glass("glass_aurora", "Glass Aurora", 0xFF070B1A, 0xFF1A2440, 0xFFEAF2FF, 0xFF5EEAD4, 0xFF8B5CF6),
+    glass("glass_ocean", "Glass Ocean", 0xFF04111F, 0xFF123049, 0xFFE6F6FF, 0xFF38BDF8, 0xFF2DD4BF),
+    glass("glass_sunset", "Glass Sunset", 0xFF140A1E, 0xFF3A1F40, 0xFFFFEFE6, 0xFFFB7185, 0xFFFBBF24),
+    glass("glass_violet", "Glass Violet", 0xFF0E0820, 0xFF2A1B52, 0xFFF3ECFF, 0xFFA78BFA, 0xFFF472B6),
+    glass("glass_mint", "Glass Mint", 0xFF051512, 0xFF16403A, 0xFFE8FFF8, 0xFF34D399, 0xFF60A5FA),
+    glass("glass_rose", "Glass Rose", 0xFF1A0A14, 0xFF45202F, 0xFFFFEAF1, 0xFFF472B6, 0xFFFDA4AF),
     light("solarized_light", "Solarized Light", 0xFFFDF6E3, 0xFFEEE8D5, 0xFF586E75, 0xFF268BD2, 0xFFB58900),
     light("latte", "Catppuccin Latte", 0xFFEFF1F5, 0xFFDCE0E8, 0xFF4C4F69, 0xFF8839EF, 0xFFEA76CB),
     light("paper", "Paper", 0xFFFAF8F3, 0xFFEDE9DF, 0xFF2B2B2B, 0xFF1F6FEB, 0xFFD9480F),
