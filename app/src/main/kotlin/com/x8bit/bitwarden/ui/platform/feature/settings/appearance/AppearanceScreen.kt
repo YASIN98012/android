@@ -174,6 +174,16 @@ fun AppearanceScreen(
                     .standardHorizontalMargin(),
             )
             Spacer(modifier = Modifier.height(height = 4.dp))
+            Image(
+    painter = painterResource(id = R.drawable.appearance_photo),
+    contentDescription = null,
+    contentScale = ContentScale.Crop,
+    modifier = Modifier
+        .size(96.dp)
+        .clip(CircleShape)
+        .align(Alignment.CenterHorizontally),
+)
+Spacer(modifier = Modifier.height(height = 8.dp))
             Text(
                 text = "Yassin Haitham",
                 color = BitwardenTheme.colorScheme.text.secondary,
