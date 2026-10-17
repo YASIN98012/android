@@ -106,7 +106,7 @@ fun BitwardenTheme(
     if (customPalette != null && customPalette.primary2 != null) {
         LaunchedEffect(customPalette.id) {
             while (true) {
-                delay(1_000L)
+                delay(100L)
                 phase = (phase + 1) % 60
             }
         }
