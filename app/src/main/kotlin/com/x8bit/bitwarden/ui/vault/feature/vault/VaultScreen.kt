@@ -217,6 +217,9 @@ private fun VaultScreenScaffold(
         canScroll = { !accountMenuVisible },
     )
 
+    val activeAccount = state.accountSummaries.firstOrNull { it.isActive }
+    val greetingName = greetingNameFor(activeAccount?.name, activeAccount?.email.orEmpty())
+    
     // Dynamic dialogs
     VaultDialogs(dialogState = state.dialog, vaultHandlers = vaultHandlers)
     BitwardenScaffold(
@@ -329,6 +332,7 @@ private fun VaultScreenScaffold(
             when (val viewState = state.viewState) {
                 is VaultState.ViewState.Content -> VaultContent(
                     state = viewState,
+                                        greetingName = greetingName,
                     actionCardState = state.actionCard,
                     vaultHandlers = vaultHandlers,
                     modifier = Modifier.fillMaxSize(),
