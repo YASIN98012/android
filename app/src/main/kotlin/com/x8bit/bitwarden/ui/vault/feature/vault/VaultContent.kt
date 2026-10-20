@@ -102,13 +102,15 @@ fun VaultContent(
         item(key = "top_spacer") {
             Spacer(modifier = Modifier.height(height = 12.dp))
         }
-                item(key = "greeting") {
-                        TypewriterGreeting(
-                name = greetingName,(
+                        item(key = "greeting") {
+            TypewriterGreeting(
+                name = greetingName,
                 modifier = Modifier
                     .standardHorizontalMargin()
                     .padding(horizontal = 16.dp),
             )
+            Spacer(modifier = Modifier.height(height = 16.dp))
+        }
             Spacer(modifier = Modifier.height(height = 16.dp))
                 }
 
