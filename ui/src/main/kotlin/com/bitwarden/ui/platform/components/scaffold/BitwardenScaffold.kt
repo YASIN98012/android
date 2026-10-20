@@ -95,8 +95,9 @@ fun BitwardenScaffold(
     Scaffold(
         modifier = Modifier
             .semantics { testTagsAsResourceId = true }
-            .then(other = modifier)
-            .glassBackground(),
+                        .then(other = modifier)
+            .glassBackground()
+            .edgeGlow(),
         topBar = {
             Box(
                 modifier = Modifier.semantics {
