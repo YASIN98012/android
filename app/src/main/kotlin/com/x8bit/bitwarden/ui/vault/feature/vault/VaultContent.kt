@@ -45,7 +45,6 @@ fun VaultContent(
     greetingName: String = "",
     modifier: Modifier = Modifier,
 ) {
-) {
     // Handles the master password prompt for the row click
     var masterPasswordRepromptItem by rememberSaveable {
         mutableStateOf<VaultState.ViewState.VaultItem?>(value = null)
