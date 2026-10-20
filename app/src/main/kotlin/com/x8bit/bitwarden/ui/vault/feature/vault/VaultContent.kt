@@ -42,8 +42,9 @@ fun VaultContent(
     state: VaultState.ViewState.Content,
     actionCardState: VaultState.ActionCardState?,
     vaultHandlers: VaultHandlers,
-        greetingName: String = "",
+    greetingName: String = "",
     modifier: Modifier = Modifier,
+) {
 ) {
     // Handles the master password prompt for the row click
     var masterPasswordRepromptItem by rememberSaveable {
@@ -96,13 +97,14 @@ fun VaultContent(
             }
     }
 
-    LazyColumn(
+        LazyColumn(
         modifier = modifier,
     ) {
         item(key = "top_spacer") {
             Spacer(modifier = Modifier.height(height = 12.dp))
         }
-                        item(key = "greeting") {
+
+        item(key = "greeting") {
             TypewriterGreeting(
                 name = greetingName,
                 modifier = Modifier
@@ -111,8 +113,6 @@ fun VaultContent(
             )
             Spacer(modifier = Modifier.height(height = 16.dp))
         }
-            Spacer(modifier = Modifier.height(height = 16.dp))
-                }
 
         actionCardState?.let {
             item(key = "action_card") {
