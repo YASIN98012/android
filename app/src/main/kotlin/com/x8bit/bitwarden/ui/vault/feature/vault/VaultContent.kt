@@ -42,6 +42,7 @@ fun VaultContent(
     state: VaultState.ViewState.Content,
     actionCardState: VaultState.ActionCardState?,
     vaultHandlers: VaultHandlers,
+        greetingName: String = "",
     modifier: Modifier = Modifier,
 ) {
     // Handles the master password prompt for the row click
@@ -102,7 +103,8 @@ fun VaultContent(
             Spacer(modifier = Modifier.height(height = 12.dp))
         }
                 item(key = "greeting") {
-            TypewriterGreeting(
+                        TypewriterGreeting(
+                name = greetingName,(
                 modifier = Modifier
                     .standardHorizontalMargin()
                     .padding(horizontal = 16.dp),
